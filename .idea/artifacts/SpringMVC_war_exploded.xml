@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SpringMVC:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="DailyService/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="DailyService" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring MVC" />
+          <element id="library" level="project" name="activation" />
+          <element id="library" level="project" name="slf4j-api-1.6.6" />
+          <element id="library" level="project" name="slf4j-log4j12-1.7.25" />
+          <element id="library" level="project" name="barchart-wrap-jackson-1.8.6-build001" />
+          <element id="library" level="project" name="spring-data-commons-2.0.0.RELEASE" />
+          <element id="library" level="project" name="commons.pool-1.5.3" />
+          <element id="library" level="project" name="commons-pool2-2.4.2" />
+          <element id="library" level="project" name="jedis-2.4.2" />
+          <element id="library" level="project" name="spring-data-redis-1.4.2.RELEASE" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
