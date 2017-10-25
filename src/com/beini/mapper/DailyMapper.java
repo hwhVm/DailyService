@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.*;
 public interface DailyMapper {
 
     @Insert("insert into daily(title,date,content,author,picUrl) values(#{title},#{date},#{content},#{author},#{picUrl});")
-    int inserUser(DailyBean dailyBean);
+    int inserDaily(DailyBean dailyBean);
 }

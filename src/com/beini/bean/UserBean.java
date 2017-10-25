@@ -5,17 +5,17 @@ package com.beini.bean;
  */
 public class UserBean {
 
-    private long id;
+    private int id;
     private String username;
     private String password;
     private String email;
     private int sex;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,6 +39,7 @@ public class UserBean {
         return sex;
     }
 
+
     public void setSex(int sex) {
         this.sex = sex;
     }
@@ -49,5 +50,15 @@ public class UserBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", sex=" + sex +
+                '}';
     }
 }

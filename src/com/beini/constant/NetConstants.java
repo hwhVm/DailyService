@@ -12,10 +12,5 @@ public class NetConstants {
      * token过期时间
      */
     public final static int TOKEN_EXPIRES_HOUR = 2;
-    /**
-     * 存放Authorization的header字段
-     */
-    public static final String AUTHORIZATION = "AUTHORIZATION";
 
-    public static final String CURRENT_USER_ID = "CURRENT_USER_ID";
 }

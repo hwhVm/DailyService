@@ -27,12 +27,13 @@ public class RedisCacheUtil {
 //        stringRedisTemplate.setKeySerializer(new JdkSerializationRedisSerializer());
     }
 
-    public TokenBean createToken(long userId) {
+    public TokenBean createToken(int userId) {
         //使用uuid作为源token
         String token = UUID.randomUUID().toString().replace("-", "");
         TokenBean model = new TokenBean(userId, token);
         //存储到redis并设置过期时间
-        stringRedisTemplate.boundValueOps(userId).set(token, NetConstants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
+
+        stringRedisTemplate.boundValueOps(String.valueOf(userId)).set(token, NetConstants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
         return model;
     }
 
@@ -45,7 +46,7 @@ public class RedisCacheUtil {
             return null;
         }
         //使用userId和源token简单拼接成的token，可以增加加密措施
-        long userId = Long.parseLong(param[0]);
+        int userId = Integer.parseInt(param[0]);
         String token = param[1];
         return new TokenBean(userId, token);
     }

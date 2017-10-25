@@ -5,6 +5,7 @@ import com.beini.constant.NetConstants;
 import com.beini.http.BaseResponseJson;
 import com.beini.service.DailyService;
 import com.beini.util.BLog;
+import com.beini.util.IpUtil;
 import com.google.gson.Gson;
 import javafx.scene.input.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -48,7 +53,7 @@ public class DailyController {
     @RequestMapping(value = "addDaily", method = RequestMethod.POST)
     public @ResponseBody
     String addDaily(@RequestBody DailyBean dailyBean) {
-        BLog.d("    addDaily   "+ new Date().toLocaleString());
+        BLog.d("    addDaily   " + DateFormat.getDateTimeInstance().format(new Date()));
         BaseResponseJson responseJson = new BaseResponseJson();
         try {
             int isSuccess = dailyService.insertDaily(dailyBean);
@@ -60,12 +65,8 @@ public class DailyController {
         } catch (Exception e) {
             responseJson.setReturnCode(NetConstants.IS_FAILED);
         }
-        return new Gson().toJson(responseJson);
-    }
 
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public void test() {
-        BLog.d("  test  ");
+        return new Gson().toJson(responseJson);
     }
 
 }

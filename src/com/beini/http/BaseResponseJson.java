@@ -29,4 +29,12 @@ public class BaseResponseJson {
         this.ReturnMessage = ReturnMessage;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "BaseResponseJson{" +
+                "ReturnCode=" + ReturnCode +
+                ", ReturnMessage='" + ReturnMessage + '\'' +
+                '}';
+    }
 }

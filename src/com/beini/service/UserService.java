@@ -9,10 +9,11 @@ import java.util.List;
  */
 public interface UserService {
 
-    UserBean findUserByName(String userName);
+    UserBean findUserByEmail(String userName);
 
     UserBean findUserById(long userId);
 
-    List<UserBean> queryUserByUserNameAndPasswrod(String userName, String password);
+    List<UserBean> queryUserByUserEmailAndPasswrod(String userName, String password);
 
+    int registerUser(UserBean userBean);
 }

@@ -19,7 +19,7 @@ public class DailyServiceImpl implements DailyService {
 
     @Override
     public int insertDaily(DailyBean dailyBean) {
-        return dailyMapper.inserUser(dailyBean);
+        return dailyMapper.inserDaily(dailyBean);
     }
 
 }

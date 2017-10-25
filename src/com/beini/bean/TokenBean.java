@@ -6,13 +6,27 @@ package com.beini.bean;
 public class TokenBean {
 
     private String token;
-    private long userId;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    private int userId;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     public TokenBean() {
 
     }
 
-    public TokenBean(long userId, String token) {
+    public TokenBean(int userId, String token) {
         this.userId = userId;
         this.token = token;
     }
@@ -29,7 +43,4 @@ public class TokenBean {
         return userId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
 }

@@ -1,17 +1,24 @@
 package com.beini.controller;
 
+import com.beini.bean.TokenBean;
 import com.beini.bean.UserBean;
 import com.beini.http.BaseResponseJson;
+import com.beini.http.LoginSuccessResponse;
 import com.beini.service.UserService;
+import com.beini.util.BLog;
+import com.beini.util.IpUtil;
 import com.beini.util.RedisCacheUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,16 +34,21 @@ public class UserController {
      * <p>
      * 登录请求一定要使用HTTPS，否则无论Token做的安全性多好密码泄露了也是白搭
      * Token的生成方式有很多种，例如比较热门的有JWT（JSON Web Tokens）、OAuth等。
+     * <p>
+     * 两次ip不一样token失效
      */
     @Autowired
     UserService userService;
 
-
     @Autowired
     private RedisCacheUtil redisCacheUtil;
 
+    @Autowired
+    IpUtil ipUtil;
+
     /**
      * login
+     * username  or email  login
      *
      * @param userBean
      * @return
@@ -44,24 +56,34 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public @ResponseBody
     String login(@RequestBody UserBean userBean) {
-        String userName = userBean.getUsername();
-        BaseResponseJson baseResponseJson = new BaseResponseJson();
+        BLog.d(" login " + DateFormat.getDateTimeInstance().format(new Date()) + "    " + userBean.toString());
 
-        if (userService.findUserByName(userName) != null) {//  is register
+        String email = userBean.getEmail();
+        LoginSuccessResponse baseResponseJson = new LoginSuccessResponse();
+        UserBean userBean1 = userService.findUserByEmail(email);
+        if (userBean1 != null) {//  is register
             String passwrod = userBean.getPassword();
-            //success return boken
-            List<UserBean> userBeans = userService.queryUserByUserNameAndPasswrod(userName, passwrod);
+
+            //success return token
+            List<UserBean> userBeans = userService.queryUserByUserEmailAndPasswrod(email, passwrod);
             if (userBeans.size() > 0) {
-                redisCacheUtil.createToken(userBeans.get(0).getId());
-
+                TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getId());
+                baseResponseJson.setIp(tokenBean.getIp());
+                baseResponseJson.setToken(tokenBean.getToken());
+                baseResponseJson.setUserId(tokenBean.getUserId());
+                baseResponseJson.setReturnCode(0);
             } else {
-
+                baseResponseJson.setReturnCode(1);
+                baseResponseJson.setReturnMessage(" error ");
             }
-        } else {  //faile
-
-
+        } else {//faile
+            baseResponseJson.setReturnCode(1);
+            baseResponseJson.setReturnMessage("user is exist");
         }
-        return new Gson().toJson(baseResponseJson);
+
+        String returnJson=new Gson().toJson(baseResponseJson);
+        BLog.d("    returnJson="+returnJson);
+        return returnJson;
     }
 
     /**
@@ -72,7 +94,7 @@ public class UserController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.POST)
     public @ResponseBody
-    String logout(UserBean currentUser) {
+    String logout(@RequestBody UserBean currentUser) {
         redisCacheUtil.deleteToken(currentUser.getId());
         return new Gson().toJson(new BaseResponseJson().setReturnCode(0));
     }
@@ -85,9 +107,29 @@ public class UserController {
      */
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public @ResponseBody
-    String register(UserBean currentUser) {
+    String register(@RequestBody UserBean currentUser) {
+        BLog.d(" register " + DateFormat.getDateTimeInstance().format(new Date()) + "    " + currentUser.toString());
+        BaseResponseJson baseResponseJson = new BaseResponseJson();
+        baseResponseJson.setReturnCode(1);
+        baseResponseJson.setReturnMessage("email no for null");
 
-        return "";
+        String email = currentUser.getEmail();
+        if (StringUtils.isEmpty(email)) {
+            return new Gson().toJson(baseResponseJson);
+        }
+
+        UserBean userBeans = userService.findUserByEmail(currentUser.getEmail());
+
+        if (userBeans != null) {
+            baseResponseJson.setReturnCode(1);
+            baseResponseJson.setReturnMessage("user is exist");
+        } else {
+            int returnSuccess = userService.registerUser(currentUser);
+            BLog.d("       returnSuccess=" + returnSuccess);
+            baseResponseJson.setReturnCode(0);
+            baseResponseJson.setReturnMessage("register is successed");
+        }
+        return new Gson().toJson(baseResponseJson);
     }
 
     /**
@@ -98,7 +140,7 @@ public class UserController {
      */
     @RequestMapping(value = "getBackPasswrod", method = RequestMethod.POST)
     public @ResponseBody
-    String getBackPasswrod(UserBean currentUser) {
+    String getBackPasswrod(@RequestBody UserBean currentUser) {
 
         return "";
     }

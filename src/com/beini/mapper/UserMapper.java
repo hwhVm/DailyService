@@ -1,6 +1,5 @@
 package com.beini.mapper;
 
-import com.beini.bean.DailyBean;
 import com.beini.bean.UserBean;
 import org.apache.ibatis.annotations.*;
 
@@ -11,11 +10,18 @@ import java.util.List;
  */
 public interface UserMapper {
 
+    @Insert("insert into userbean(username,password,email,sex) values(#{username},#{password},#{email},#{sex})")
+    int insertUser(UserBean userBean);
+
+    @Select("select * from userbean where email=#{email} and  password=#{password}")
+    List<UserBean> queryUserByUserEmailAndPasswrod(@Param("email") String email, @Param("password") String password);
+
+    @Select("select id id,username username,password password,email email,sex sex from userbean where email=#{email}")
+    UserBean getUserByEmail(String email);
+
+
     @Update("UPDATE User set username=#{username},password=#{password},email=#{email},sex=#{sex} where id=#{id}")
     void updateUser(UserBean user);
-
-    @Insert("insert into User(username,password,email,sex) values(#{username},#{password},#{email},#{sex});")
-    void insertUser(UserBean user);
 
     @Delete("DELETE FROM User where id=#{id}")
     int deleteUserById(int id);
@@ -28,11 +34,5 @@ public interface UserMapper {
 
     @Select("select count(*) from User")
     int getUserCount();
-
-    @Select("select * from User where username=#{username} and  password=#{password}")
-    List<UserBean> queryUserByUserNameAndPasswrod(@Param("username") String name, @Param("password") String password);
-
-    @Select("select id id,username username,password password,email email,sex sex from User where username=#{username}")
-    UserBean getUserByName(String username);
 
 }
