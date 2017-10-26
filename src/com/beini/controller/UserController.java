@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +69,8 @@ public class UserController {
             //success return token
             List<UserBean> userBeans = userService.queryUserByUserEmailAndPasswrod(email, passwrod);
             if (userBeans.size() > 0) {
-                TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getId());
+//                TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getId());
+                TokenBean tokenBean = new TokenBean();
                 baseResponseJson.setIp(tokenBean.getIp());
                 baseResponseJson.setToken(tokenBean.getToken());
                 baseResponseJson.setUserId(tokenBean.getUserId());
@@ -81,8 +84,8 @@ public class UserController {
             baseResponseJson.setReturnMessage("user is exist");
         }
 
-        String returnJson=new Gson().toJson(baseResponseJson);
-        BLog.d("    returnJson="+returnJson);
+        String returnJson = new Gson().toJson(baseResponseJson);
+        BLog.d("    returnJson=" + returnJson);
         return returnJson;
     }
 
@@ -144,4 +147,5 @@ public class UserController {
 
         return "";
     }
+
 }
