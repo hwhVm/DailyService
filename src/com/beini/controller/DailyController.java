@@ -1,13 +1,12 @@
 package com.beini.controller;
 
 import com.beini.bean.DailyBean;
+import com.beini.bean.DailyPageBean;
 import com.beini.constant.NetConstants;
 import com.beini.http.BaseResponseJson;
 import com.beini.service.DailyService;
 import com.beini.util.BLog;
-import com.beini.util.IpUtil;
 import com.google.gson.Gson;
-import javafx.scene.input.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -53,7 +49,7 @@ public class DailyController {
     @RequestMapping(value = "addDaily", method = RequestMethod.POST)
     public @ResponseBody
     String addDaily(@RequestBody DailyBean dailyBean) {
-        BLog.d("    addDaily   " + DateFormat.getDateTimeInstance().format(new Date()));
+        BLog.d("    addDaily   ");
         BaseResponseJson responseJson = new BaseResponseJson();
         try {
             int isSuccess = dailyService.insertDaily(dailyBean);
@@ -67,6 +63,23 @@ public class DailyController {
         }
 
         return new Gson().toJson(responseJson);
+    }
+
+    @RequestMapping(value = "queryDailyByNum", method = RequestMethod.POST)
+    public @ResponseBody
+    String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean) {
+        BLog.d("    queryDailyByNum   ");
+
+        DailyPageBean dailyPageBean = dailyService.queryDailyByNum(dailyPageRequestBean);
+        return new Gson().toJson(dailyPageBean);
+    }
+
+    @RequestMapping(value = "queryDailyCount", method = RequestMethod.POST)
+    public @ResponseBody
+    String queryDailyCount() {
+        BLog.d("    queryDailyCount   ");
+        int dailyCount = dailyService.queryDailyCount();
+        return new Gson().toJson(dailyCount);
     }
 
 }

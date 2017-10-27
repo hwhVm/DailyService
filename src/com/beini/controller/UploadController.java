@@ -35,9 +35,11 @@ public class UploadController {
         String path = request.getSession().getServletContext()
                 .getRealPath("upload");
 
-//        String path=request.getContextPath()+File.separator+"upload";
+
         BLog.d("  fileName=" + file + " path== " + path);
+
         String fileName = file.getOriginalFilename();
+
         File targetFile = new File(path, fileName);
         if (!targetFile.exists()) {
             targetFile.mkdirs();

@@ -58,7 +58,7 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public @ResponseBody
     String login(@RequestBody UserBean userBean) {
-        BLog.d(" login " + DateFormat.getDateTimeInstance().format(new Date()) + "    " + userBean.toString());
+        BLog.d(" login " + userBean.toString());
 
         String email = userBean.getEmail();
         LoginSuccessResponse baseResponseJson = new LoginSuccessResponse();
@@ -111,7 +111,7 @@ public class UserController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public @ResponseBody
     String register(@RequestBody UserBean currentUser) {
-        BLog.d(" register " + DateFormat.getDateTimeInstance().format(new Date()) + "    " + currentUser.toString());
+        BLog.d(" register " + currentUser.toString());
         BaseResponseJson baseResponseJson = new BaseResponseJson();
         baseResponseJson.setReturnCode(1);
         baseResponseJson.setReturnMessage("email no for null");

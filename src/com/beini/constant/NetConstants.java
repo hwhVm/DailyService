@@ -5,7 +5,6 @@ package com.beini.constant;
  */
 
 public class NetConstants {
-    public final static String baseUrl = "http://10.0.0.40:8080/";
     public final static int IS_SUCCESS = 0;
     public final static int IS_FAILED = 1;
     /**
