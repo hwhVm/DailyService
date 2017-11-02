@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="jedis-2.4.2">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jedis-2.4.2.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

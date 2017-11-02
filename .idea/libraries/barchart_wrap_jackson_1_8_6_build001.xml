@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="barchart-wrap-jackson-1.8.6-build001">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/barchart-wrap-jackson-1.8.6-build001.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
