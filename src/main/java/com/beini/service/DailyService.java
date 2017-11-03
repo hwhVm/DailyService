@@ -15,4 +15,8 @@ public interface DailyService {
     DailyPageBean queryDailyByNum(DailyPageBean dailyPageBean);
 
     int queryDailyCount();
+
+    void updataDaily(DailyBean dailyBean);
+
+    void deteleDaily(int id);
 }

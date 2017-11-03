@@ -1,5 +1,7 @@
 package com.beini.util;
 
+import org.apache.log4j.Logger;
+
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -11,6 +13,7 @@ public class BLog {
 
     public static void d(String strLog) {
         if (TAG) {
+//            Logger.getLogger(BLog.class).debug("  ---------" + DateFormat.getDateTimeInstance().format(new Date()) + "--------------->" + strLog);
             System.out.println("  ---------" + DateFormat.getDateTimeInstance().format(new Date()) + "--------------->" + strLog);
         }
     }

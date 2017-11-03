@@ -19,24 +19,29 @@ public class DailyServiceImpl implements DailyService {
     @Autowired
     private DailyMapper dailyMapper;
 
-    private int sumCount;
+//    private int sumCount;
 
-    @Override
     public int insertDaily(DailyBean dailyBean) {
         return dailyMapper.inserDaily(dailyBean);
     }
 
-    @Override
     public DailyPageBean queryDailyByNum(DailyPageBean dailyPageBean) {
-        List<DailyBean> dailyBeans = dailyMapper.queryDailyByNum(dailyPageBean.getCurrentPage(), dailyPageBean.getPageSize());
+        List<DailyBean> dailyBeans = dailyMapper.queryDailyByNum(dailyPageBean.getCurrentPage(), dailyPageBean.getPageSize(),dailyPageBean.getUser_id());
         dailyPageBean.setDailyBeans(dailyBeans);
 //      dailyPageBean.setDailyCount(getDailyCount());
         return dailyPageBean;
     }
 
-    @Override
     public int queryDailyCount() {
         return dailyMapper.queryDailyCount();
+    }
+
+    public void updataDaily(DailyBean dailyBean) {
+        dailyMapper.updataDaily(dailyBean);
+    }
+
+    public void deteleDaily(int id) {
+        dailyMapper.deteleDailyById(id);
     }
 
 

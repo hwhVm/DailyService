@@ -5,23 +5,33 @@ package com.beini.bean;
  */
 public class DailyBean {
 
-    private int id;
+    private int daily_id;
     private String title;
     private String date;
     private String content;
     private String author;
     private String picUrl;
+    private int user_id;
+
 
     @Override
     public String toString() {
         return "DailyBean{" +
-                "id=" + id +
+                "id=" + daily_id +
                 ", title='" + title + '\'' +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
                 ", author='" + author + '\'' +
                 ", picUrl='" + picUrl + '\'' +
                 '}';
+    }
+
+    public int getDaily_id() {
+        return daily_id;
+    }
+
+    public void setDaily_id(int daily_id) {
+        this.daily_id = daily_id;
     }
 
     public String getContent() {
@@ -32,13 +42,6 @@ public class DailyBean {
         this.content = content;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -72,4 +75,11 @@ public class DailyBean {
         this.date = date;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 }

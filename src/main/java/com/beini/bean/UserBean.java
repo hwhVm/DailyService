@@ -1,22 +1,26 @@
 package com.beini.bean;
 
+import java.util.List;
+
 /**
  * Created by beini on 2017/10/19.
  */
 public class UserBean {
 
-    private int id;
+    private int user_id;
     private String username;
     private String password;
     private String email;
     private int sex;
+    private List<DailyBean> stdudents;
 
-    public int getId() {
-        return id;
+
+    public List<DailyBean> getStdudents() {
+        return stdudents;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStdudents(List<DailyBean> stdudents) {
+        this.stdudents = stdudents;
     }
 
     public String getUsername() {
@@ -51,10 +55,20 @@ public class UserBean {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
-                "id=" + id +
+                "id=" + user_id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

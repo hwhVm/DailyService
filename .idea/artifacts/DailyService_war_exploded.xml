@@ -50,6 +50,7 @@
           <element id="library" level="project" name="Maven: redis.clients:jedis:2.4.2" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
     </root>

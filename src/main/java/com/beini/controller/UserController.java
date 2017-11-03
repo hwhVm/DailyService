@@ -98,7 +98,7 @@ public class UserController {
     @RequestMapping(value = "logout", method = RequestMethod.POST)
     public @ResponseBody
     String logout(@RequestBody UserBean currentUser) {
-        redisCacheUtil.deleteToken(currentUser.getId());
+        redisCacheUtil.deleteToken(currentUser.getUser_id());
         return new Gson().toJson(new BaseResponseJson().setReturnCode(0));
     }
 

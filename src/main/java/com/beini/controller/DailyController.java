@@ -49,20 +49,41 @@ public class DailyController {
     @RequestMapping(value = "addDaily", method = RequestMethod.POST)
     public @ResponseBody
     String addDaily(@RequestBody DailyBean dailyBean) {
-        BLog.d("    addDaily   ");
+        BLog.d("    addDaily   "+dailyBean.toString());
         BaseResponseJson responseJson = new BaseResponseJson();
         try {
             int isSuccess = dailyService.insertDaily(dailyBean);
+            BLog.d(" isSuccess="+isSuccess);
             if (isSuccess == 1) {
                 responseJson.setReturnCode(NetConstants.IS_SUCCESS);
             } else {
                 responseJson.setReturnCode(NetConstants.IS_FAILED);
             }
         } catch (Exception e) {
+            BLog.d(" e="+e);
             responseJson.setReturnCode(NetConstants.IS_FAILED);
         }
 
         return new Gson().toJson(responseJson);
+    }
+
+    @RequestMapping(value = "updataDaily", method = RequestMethod.POST)
+    public @ResponseBody
+    String updataDaily(DailyBean dailyBean) {
+
+        dailyService.updataDaily(dailyBean);
+        BaseResponseJson baseResponseJson = new BaseResponseJson();
+        baseResponseJson.setReturnCode(0);
+        return new Gson().toJson(baseResponseJson);
+    }
+
+    @RequestMapping(value = "deteleDaily", method = RequestMethod.POST)
+    public @ResponseBody
+    String deteleDailyById(DailyBean dailyBean) {
+        dailyService.deteleDaily(dailyBean.getDaily_id());
+        BaseResponseJson baseResponseJson = new BaseResponseJson();
+        baseResponseJson.setReturnCode(0);
+        return new Gson().toJson(baseResponseJson);
     }
 
     @RequestMapping(value = "queryDailyByNum", method = RequestMethod.POST)
@@ -81,5 +102,6 @@ public class DailyController {
         int dailyCount = dailyService.queryDailyCount();
         return new Gson().toJson(dailyCount);
     }
+
 
 }
