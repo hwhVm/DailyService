@@ -7,25 +7,137 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5689c234-b8ce-4bdd-880e-75a50062e272" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/spring-common" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/DailyBean.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/DailyBean.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/DailyPageBean.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/DailyPageBean.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/UserBean.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/UserBean.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/controller/DailyController.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/controller/DailyController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/mapper/DailyMapper.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/mapper/DailyMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/mapper/UserMapper.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/mapper/UserMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/DailyService.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/DailyService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/impl/DailyServiceImpl.class" afterPath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/impl/DailyServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/beini/bean/DailyPageBean.class" afterPath="$PROJECT_DIR$/target/classes/com/beini/bean/DailyPageBean.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/beini/bean/UserBean.class" afterPath="$PROJECT_DIR$/target/classes/com/beini/bean/UserBean.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/beini/service/DailyService.class" afterPath="$PROJECT_DIR$/target/classes/com/beini/service/DailyService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/beini/service/impl/DailyServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/beini/service/impl/DailyServiceImpl.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/DailyBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/DailyPageBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/TokenBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/bean/UserBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/constant/NetConstants.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/controller/DailyController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/controller/UploadController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/controller/UserController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/http/BaseResponseJson.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/http/FileResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/http/LoginSuccessResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/mapper/DailyMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/mapper/UserMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/DailyService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/impl/DailyServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/service/impl/UserServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/util/BLog.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/util/IpUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/com/beini/util/RedisCacheUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/jdbc.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/log4j.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/mybatis-config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/redis.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/spring-common.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/spring-data-redis.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/classes/spring-mvc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/aopalliance-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/aspectjweaver-1.8.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/commons-dbcp-1.2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/commons-fileupload-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/commons-io-2.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/commons-logging-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/commons-pool-1.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/commons-pool2-2.4.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/gson-2.8.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/javax.servlet-api-3.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/jedis-2.4.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/junit-3.8.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/mybatis-3.4.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/mybatis-spring-1.3.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/mysql-connector-java-5.1.40.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/org.apache.commons.io-2.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/org.apache.commons.pool-1.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/slf4j-api-1.6.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/slf4j-log4j12-1.7.25.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-aop-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-aspects-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-beans-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-context-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-context-support-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-core-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-data-commons-2.0.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-data-redis-1.4.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-expression-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-instrument-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-instrument-tomcat-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-jdbc-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-jms-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-messaging-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-orm-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-oxm-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-test-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-tx-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-web-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-webmvc-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/spring-webmvc-portlet-4.3.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/lib/standard-1.1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/WEB-INF/web.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/DailyService_war_exploded/index.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/bean/DailyBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/bean/DailyPageBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/bean/TokenBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/bean/UserBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/constant/NetConstants.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/controller/DailyController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/controller/UploadController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/controller/UserController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/http/BaseResponseJson.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/http/FileResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/http/LoginSuccessResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/mapper/DailyMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/mapper/UserMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/service/DailyService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/service/impl/DailyServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/service/impl/UserServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/sql/DailySql$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/sql/DailySql$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/sql/DailySql.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/util/BLog.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/util/IpUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/com/beini/util/RedisCacheUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/jdbc.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/log4j.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/mybatis-config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/redis.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/spring-common.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/spring-data-redis.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/classes/spring-mvc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/WEB-INF/web.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVC_war_exploded/index.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/bean/DailyBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/bean/DailyPageBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/bean/TokenBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/bean/UserBean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/constant/NetConstants.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/controller/DailyController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/controller/UploadController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/controller/UserController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/http/BaseResponseJson.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/http/FileResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/http/LoginSuccessResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/mapper/DailyMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/mapper/UserMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/service/DailyService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/service/impl/DailyServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/service/impl/UserServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/util/BLog.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/util/IpUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/beini/util/RedisCacheUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/log4j.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis-config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/redis.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/spring-common.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/spring-data-redis.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/spring-mvc.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DailyService.iml" afterPath="$PROJECT_DIR$/DailyService.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/spring-common.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring-common.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/spring-common.xml" afterPath="$PROJECT_DIR$/target/classes/spring-common.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -59,8 +171,8 @@
       <file leaf-file-name="mybatis-config.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+            <state relative-caret-position="165">
+              <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -1098,7 +1210,7 @@
       <workItem from="1509520338890" duration="4491000" />
       <workItem from="1509526919595" duration="2781000" />
       <workItem from="1509590670648" duration="8979000" />
-      <workItem from="1509672433414" duration="21481000" />
+      <workItem from="1509672433414" duration="21594000" />
     </task>
     <task id="LOCAL-00001" summary="添加多文件接收支持&#10;添加一个普通测试get请求接口">
       <created>1491902084633</created>
@@ -1359,7 +1471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509693393285</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="添加数据库读写分离 1">
+      <created>1509702286946</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1509702286946</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1395,7 +1514,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="472432000" />
+    <option name="totallyTimeSpent" value="472545000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1500,7 +1619,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="注解的方式实现SQL构造器实现" />
     <MESSAGE value="添加验证码" />
     <MESSAGE value="验证验证码功能" />
     <MESSAGE value="添加邮箱验证" />
@@ -1525,7 +1643,8 @@
     <MESSAGE value="添加Mave，调试成功" />
     <MESSAGE value="配置 log4j" />
     <MESSAGE value="添加一对多的映射" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加一对多的映射" />
+    <MESSAGE value="添加数据库读写分离 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加数据库读写分离 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1536,7 +1655,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/beini/util/IpUtil.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/src.zip!/java/util/Date.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -1851,18 +1969,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/beini/sql/DynamicPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
           <folding />
         </state>
       </provider>
