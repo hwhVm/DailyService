@@ -10,9 +10,6 @@ import java.util.List;
  */
 public interface UserMapper {
 
-    @Insert("insert into userbean(username,password,email,sex) values(#{username},#{password},#{email},#{sex})")
-    int insertUser(UserBean userBean);
-
     @Select("select * from userbean where email=#{email} and  password=#{password}")
     List<UserBean> queryUserByUserEmailAndPasswrod(@Param("email") String email, @Param("password") String password);
 
