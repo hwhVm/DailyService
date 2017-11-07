@@ -6,7 +6,6 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd	">
 
 
-
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -14,12 +13,11 @@
     </bean>
 
 
-
-    <!-- 配置数据源 ，dbcp -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    <!-- 配置数据源 ，dbcp  写-->
+    <bean id="dataSourceMaster" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="${driver}"/>
-        <property name="url" value="${url}"/>
+        <property name="url" value="${master.url}"/>
         <property name="username" value="${username}"/>
         <property name="password" value="${password}"/>
         <!-- 初始化连接大小 -->
@@ -33,8 +31,8 @@
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="${maxWait}"/>
     </bean>
-
-    <bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource"
+    <!--读-->
+    <bean id="dataSourceSlave" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="${driver}"/>
         <property name="url" value="${slave.url}"/>
@@ -52,30 +50,42 @@
         <property name="maxWait" value="${maxWait}"/>
     </bean>
 
+
+    <!-- 配置动态分配的读写 数据源 -->
+    <bean id="dataSource" class="com.beini.switchsource.ChooseDataSource" lazy-init="true">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String" value-type="javax.sql.DataSource">
+                <!-- write -->
+                <entry key="write" value-ref="dataSourceMaster"/>
+                <!-- read -->
+                <entry key="read" value-ref="dataSourceSlave"/>
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="dataSourceMaster"/>
+        <property name="methodType">
+            <map key-type="java.lang.String">
+                <!-- read -->
+                <entry key="read" value=",get,select,count,list,query"/>
+                <!-- write -->
+                <entry key="write" value=",add,create,update,delete,remove,"/>
+            </map>
+        </property>
+    </bean>
+
+
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件   mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactoryMaster" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--数据库连接池-->
         <property name="dataSource" ref="dataSource"/>
-        <!-- 自动扫描entity目录 -->
-        <!--<property name="mapperLocations" value="classpath:com/beini/mapper/*.xml"/>-->
-        <!--<property name="configLocation" value="classpath:config/mybatis-config.xml"/>-->
-    </bean>
-    <bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--数据库连接池-->
-        <property name="dataSource" ref="dataSource2"/>
         <!-- 自动扫描entity目录 -->
         <!--<property name="mapperLocations" value="classpath:com/beini/mapper/*.xml"/>-->
         <!--<property name="configLocation" value="classpath:config/mybatis-config.xml"/>-->
     </bean>
 
     <!-- (事务管理:DataSourceTransactionManager dataSource:引用上面定义的数据源 -->
-    <bean id="transactionManager"
+    <bean id="transactionManagerMaster"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="transactionManager2"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource2"/>
     </bean>
 
 
@@ -86,12 +96,8 @@
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类   mybatis自动扫描加载Sql映射文件/接口  basePackage:指定sql映射文件/接口所在的包（自动扫描）-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.beini.mapper"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-    </bean>
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.beini.mapperslave"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryMaster"/>
     </bean>
 
 

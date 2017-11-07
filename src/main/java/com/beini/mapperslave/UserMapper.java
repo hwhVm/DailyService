@@ -1,4 +1,4 @@
-package com.beini.mapper;
+package com.beini.mapperslave;
 
 import com.beini.bean.UserBean;
 import org.apache.ibatis.annotations.*;
@@ -9,6 +9,9 @@ import java.util.List;
  * Created by beini on 2017/10/23.
  */
 public interface UserMapper {
+
+    @Insert("insert into userbean(username,password,email,sex) values(#{username},#{password},#{email},#{sex})")
+    int insertUser(UserBean userBean);
 
     @Select("select * from userbean where email=#{email} and  password=#{password}")
     List<UserBean> queryUserByUserEmailAndPasswrod(@Param("email") String email, @Param("password") String password);

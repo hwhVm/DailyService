@@ -1,9 +1,8 @@
 package com.beini.service.impl;
 
 import com.beini.bean.UserBean;
-import com.beini.mapper.DailyMapper;
-import com.beini.mapper.UserMapper;
-import com.beini.mapperslave.UserSlaveMapper;
+import com.beini.mapperslave.UserMapper;
+import com.beini.mappermaster.UserMasterMapper;
 import com.beini.service.UserService;
 import com.beini.util.BLog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    UserSlaveMapper userSlaveMapper;
+//    @Autowired
+//    UserMasterMapper userMasterMapper;
 
     public UserBean findUserByEmail(String email) {
         return userMapper.getUserByEmail(email);
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     public int registerUser(UserBean userBean) {
         BLog.d("    userBean.toString()="+userBean.toString());
-        return userSlaveMapper.insertUser(userBean);
+        return userMapper.insertUser(userBean);
     }
 
 

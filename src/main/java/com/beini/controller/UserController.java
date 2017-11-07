@@ -68,6 +68,7 @@ public class UserController {
 
             //success return token
             List<UserBean> userBeans = userService.queryUserByUserEmailAndPasswrod(email, passwrod);
+            BLog.d("          userBeans.size()="+userBeans.size());
             if (userBeans.size() > 0) {
 //                TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getId());
                 TokenBean tokenBean = new TokenBean();
@@ -122,7 +123,7 @@ public class UserController {
         }
 
         UserBean userBeans = userService.findUserByEmail(currentUser.getEmail());
-
+        BLog.d("              (userBeans==null)="+(userBeans==null));
         if (userBeans != null) {
             baseResponseJson.setReturnCode(1);
             baseResponseJson.setReturnMessage("user is exist");

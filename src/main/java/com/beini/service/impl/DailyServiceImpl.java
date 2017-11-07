@@ -2,7 +2,7 @@ package com.beini.service.impl;
 
 import com.beini.bean.DailyBean;
 import com.beini.bean.DailyPageBean;
-import com.beini.mapper.DailyMapper;
+import com.beini.mapperslave.DailyMapper;
 import com.beini.service.DailyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

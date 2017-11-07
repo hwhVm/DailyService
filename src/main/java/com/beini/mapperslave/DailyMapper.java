@@ -1,4 +1,4 @@
-package com.beini.mapper;
+package com.beini.mapperslave;
 
 import com.beini.bean.DailyBean;
 import org.apache.ibatis.annotations.*;
