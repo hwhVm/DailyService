@@ -269,7 +269,7 @@
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
         </dependency>
-    <!--阿里的连接池-->
+    <!--阿里的连接池 暂时没用到-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>

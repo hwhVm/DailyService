@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 /**
@@ -96,5 +97,46 @@ public class UploadController {
                 .setFileId(request.getContextPath() + "/upload/");
         Gson gson = new Gson();
         out.write(gson.toJson(fileResponse));
+    }
+
+    /**
+     * 请求下载 的时候应该返回：
+     *             1  文件修改时间；
+     *            2   总长度
+     *
+     * @param file
+     * @param request
+     * @param model
+     * @param out
+     */
+    @RequestMapping(value = "")
+    public void download(
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            HttpServletRequest request, ModelMap model, PrintWriter out) {
+        long lStartPos = 0;
+        int stratPos = 0;
+        int fileLength = 1000000;
+        OutputStream os = null;
+
+        //1 校验是否文件存在
+        // 存在：开始拼接；
+
+        // 文件是否更新
+
+        //不存在：从0开始上传
+
+
+        String contentRange = request.getHeader("Content-Range");
+        int range = Integer.parseInt(request.getHeader("Range"));
+
+        BLog.d("      contentRange =" + contentRange);
+        if (!new File("uploadDemo").exists()) {
+            new File("uploadDemo").mkdir();
+        }
+        if (contentRange == null) {
+
+        }
+
+
     }
 }

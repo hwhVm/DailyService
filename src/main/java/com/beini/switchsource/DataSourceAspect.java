@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class DataSourceAspect {
-    @Pointcut("execution(* com.beini.mappermaster.*.*(..))")
+    @Pointcut("execution(* com.beini.mapperslave.*.*(..))")
     public void aspect() {
     }
 
