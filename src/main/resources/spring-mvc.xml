@@ -15,8 +15,8 @@
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!--用来解析request请求的默认编码格式-->
         <property name="defaultEncoding" value="utf-8"/>
-        <!-- 以字节为单位的最大上传文件的大小  20M 当设为-1时表示无限制   默认是-1-->
-        <property name="maxUploadSize" value="20480"/>
+        <!-- 以字节为单位的最大上传文件的大小  20M=2*1024*1024=2097152 当设为-1时表示无限制   默认是-1-->
+        <property name="maxUploadSize" value="41943040"/>
         <!--maxInMemorySize：设置在文件上传时允许写到内存中的最大值  以字节为单位计算  默认是10240-->
         <!-- uploadTempDir：设置上传文件时的临时目录  默认是Servlet容器的临时目录 -->
     </bean>

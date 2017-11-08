@@ -9,11 +9,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import sun.rmi.runtime.Log;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 
 /**
  * Created by beini on 2017/10/26.
@@ -32,7 +33,7 @@ public class UploadController {
     public void uploadFile(
             @RequestParam(value = "file", required = false) MultipartFile file,
             HttpServletRequest request, ModelMap model, PrintWriter out) {
-
+        BLog.d("      uploadFile   ");
         String path = request.getSession().getServletContext()
                 .getRealPath("upload");
 
@@ -101,42 +102,61 @@ public class UploadController {
 
     /**
      * 请求下载 的时候应该返回：
-     *             1  文件修改时间；
-     *            2   总长度
+     * 1  文件修改时间；
+     * 2   总长度
      *
      * @param file
      * @param request
      * @param model
      * @param out
      */
-    @RequestMapping(value = "")
+    @RequestMapping(value = "breakpointdownload")
     public void download(
             @RequestParam(value = "file", required = false) MultipartFile file,
-            HttpServletRequest request, ModelMap model, PrintWriter out) {
-        long lStartPos = 0;
-        int stratPos = 0;
-        int fileLength = 1000000;
-        OutputStream os = null;
-
-        //1 校验是否文件存在
-        // 存在：开始拼接；
-
-        // 文件是否更新
-
-        //不存在：从0开始上传
-
+            HttpServletRequest request, HttpServletResponse response, ModelMap model, PrintWriter out) throws IOException {
 
         String contentRange = request.getHeader("Content-Range");
-        int range = Integer.parseInt(request.getHeader("Range"));
+        String range = request.getHeader("Range");
+        BLog.d("       contentRange=" + contentRange + "   range=" + range);
 
-        BLog.d("      contentRange =" + contentRange);
-        if (!new File("uploadDemo").exists()) {
-            new File("uploadDemo").mkdir();
+        String filename = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\zz.zip";
+        BLog.d("          new File(filename).exists()=  " + new File(filename).exists());
+        RandomAccessFile raFile = new RandomAccessFile(filename, "r");
+
+        int start = 0, end = 0;
+        if (null != range && range.startsWith("bytes=")) {
+            String[] values = range.split("=")[1].split("-");
+            start = Integer.parseInt(values[0]);
+            end = Integer.parseInt(values[1]);
         }
-        if (contentRange == null) {
-
+        int requestSize = 0;
+        if (end != 0 && end > start) {
+            requestSize = end - start + 1;
+            response.addHeader("content-length", "" + (requestSize));
+        } else {
+            requestSize = Integer.MAX_VALUE;
         }
-
+        byte[] buffer = new byte[4096];
+        response.setContentType("application/x-download");
+        filename = new String(filename.getBytes("UTF-8"), "ISO8859-1");
+        response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+        ServletOutputStream os = response.getOutputStream();
+        int needSize = requestSize;
+        raFile.seek(start);
+        while (needSize > 0) {
+            int len = raFile.read(buffer);
+            if (needSize < buffer.length) {
+                os.write(buffer, 0, needSize);
+            } else {
+                os.write(buffer, 0, len);
+                if (len < buffer.length) {
+                    break;
+                }
+            }
+            needSize -= buffer.length;
+        }
+        raFile.close();
+        os.close();
 
     }
 }
