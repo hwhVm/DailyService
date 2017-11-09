@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -105,48 +106,51 @@ public class UploadController {
      * 1  文件修改时间；
      * 2   总长度
      *
-     * @param file
      * @param request
-     * @param model
-     * @param out
      */
     @RequestMapping(value = "breakpointdownload")
-    public void download(
-            @RequestParam(value = "file", required = false) MultipartFile file,
-            HttpServletRequest request, HttpServletResponse response, ModelMap model, PrintWriter out) throws IOException {
+    public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String contentRange = request.getHeader("Content-Range");
         String range = request.getHeader("Range");
         BLog.d("       contentRange=" + contentRange + "   range=" + range);
 
-        String filename = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\zz.zip";
+        String filename = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\upload.zip";
         BLog.d("          new File(filename).exists()=  " + new File(filename).exists());
-        RandomAccessFile raFile = new RandomAccessFile(filename, "r");
 
-        int start = 0, end = 0;
-        if (null != range && range.startsWith("bytes=")) {
-            String[] values = range.split("=")[1].split("-");
-            start = Integer.parseInt(values[0]);
-            end = Integer.parseInt(values[1]);
-        }
-        int requestSize = 0;
+
+        File file1 = new File(filename);
+        long maxLength = file1.length();
+        long lastModified = file1.lastModified();
+
+        BLog.d("   range=" + range + "   file.length()()=" + maxLength + "     lastModified=" + lastModified);
+
+        long start = Long.parseLong(range), end = maxLength;
+
+        long requestSize;
         if (end != 0 && end > start) {
-            requestSize = end - start + 1;
+            requestSize = end - start;
             response.addHeader("content-length", "" + (requestSize));
         } else {
             requestSize = Integer.MAX_VALUE;
         }
-        byte[] buffer = new byte[4096];
+        response.addHeader("If-Range", String.valueOf(lastModified));
+
         response.setContentType("application/x-download");
         filename = new String(filename.getBytes("UTF-8"), "ISO8859-1");
         response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+
+
+        RandomAccessFile raFile = new RandomAccessFile(filename, "r");
+        byte[] buffer = new byte[4096];
         ServletOutputStream os = response.getOutputStream();
-        int needSize = requestSize;
+        long needSize = requestSize;
         raFile.seek(start);
+
         while (needSize > 0) {
             int len = raFile.read(buffer);
             if (needSize < buffer.length) {
-                os.write(buffer, 0, needSize);
+                os.write(buffer, 0, (int) needSize);
             } else {
                 os.write(buffer, 0, len);
                 if (len < buffer.length) {
@@ -155,6 +159,7 @@ public class UploadController {
             }
             needSize -= buffer.length;
         }
+
         raFile.close();
         os.close();
 
