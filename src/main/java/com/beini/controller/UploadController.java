@@ -1,14 +1,14 @@
 package com.beini.controller;
 
+import com.beini.bean.FileRequestBean;
+import com.beini.bean.UserBean;
 import com.beini.http.FileResponse;
 import com.beini.util.BLog;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sun.rmi.runtime.Log;
 
@@ -101,6 +101,22 @@ public class UploadController {
         out.write(gson.toJson(fileResponse));
     }
 
+    @RequestMapping(value = "returnFileInfo",method = RequestMethod.POST)
+    public @ResponseBody
+    String returnFileInfo(@RequestBody FileRequestBean bean) {
+        String filePath = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\upload.zip"; //根据id/username查出来,暂时固定测速
+        File file = new File(filePath);
+        FileRequestBean newFileRequestBean = new FileRequestBean();
+        newFileRequestBean.setFilePath(filePath);
+        newFileRequestBean.setLastModified(file.lastModified());
+        newFileRequestBean.setFileSize(file.length());
+        newFileRequestBean.setFileName("");
+        newFileRequestBean.setId(1);
+        newFileRequestBean.setRange("3");
+        return new Gson().toJson(newFileRequestBean);
+    }
+
+
     /**
      * 请求下载 的时候应该返回：
      * 1  文件修改时间；
@@ -110,16 +126,15 @@ public class UploadController {
      */
     @RequestMapping(value = "breakpointdownload")
     public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         String contentRange = request.getHeader("Content-Range");
+
         String range = request.getHeader("Range");
-        BLog.d("       contentRange=" + contentRange + "   range=" + range);
+//        String filePath = request.getParameter("filePath");//可能为空
+        String filePath = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\upload.zip"; //根据id/username查出来,暂时固定测速
 
-        String filename = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\upload.zip";
-        BLog.d("          new File(filename).exists()=  " + new File(filename).exists());
+        BLog.d("          new File(filename).exists()=  " + new File(filePath).exists());
 
-
-        File file1 = new File(filename);
+        File file1 = new File(filePath);
         long maxLength = file1.length();
         long lastModified = file1.lastModified();
 
@@ -137,11 +152,11 @@ public class UploadController {
         response.addHeader("If-Range", String.valueOf(lastModified));
 
         response.setContentType("application/x-download");
-        filename = new String(filename.getBytes("UTF-8"), "ISO8859-1");
-        response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+        filePath = new String(filePath.getBytes("UTF-8"), "ISO8859-1");
+        response.addHeader("Content-Disposition", "attachment;filename=" + filePath);
 
 
-        RandomAccessFile raFile = new RandomAccessFile(filename, "r");
+        RandomAccessFile raFile = new RandomAccessFile(filePath, "r");
         byte[] buffer = new byte[4096];
         ServletOutputStream os = response.getOutputStream();
         long needSize = requestSize;
