@@ -4,6 +4,7 @@ import com.beini.bean.FileRequestBean;
 import com.beini.bean.UserBean;
 import com.beini.http.FileResponse;
 import com.beini.util.BLog;
+import com.beini.util.MD5Util;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -101,7 +102,7 @@ public class UploadController {
         out.write(gson.toJson(fileResponse));
     }
 
-    @RequestMapping(value = "returnFileInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "returnFileInfo", method = RequestMethod.POST)
     public @ResponseBody
     String returnFileInfo(@RequestBody FileRequestBean bean) {
         String filePath = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\upload.zip"; //根据id/username查出来,暂时固定测速
@@ -113,35 +114,40 @@ public class UploadController {
         newFileRequestBean.setFileName("");
         newFileRequestBean.setId(1);
         newFileRequestBean.setRange("3");
+        newFileRequestBean.setFileMd5(MD5Util.file2Md5(file));
         return new Gson().toJson(newFileRequestBean);
     }
-
+    /**
+     *   下载：
+     *    1 单线程下载
+     *    2 多线程下载  tcp的拥塞算法决定了多线程下载比较快
+     *    上传：
+     *    1 单线程上传
+     *    2 多线程上传
+     */
 
     /**
      * 请求下载 的时候应该返回：
      * 1  文件修改时间；
-     * 2   总长度
+     * 2  总长度
+     * 3  文件完整性的校验 md5
      *
      * @param request
      */
     @RequestMapping(value = "breakpointdownload")
     public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String contentRange = request.getHeader("Content-Range");
-
         String range = request.getHeader("Range");
-//        String filePath = request.getParameter("filePath");//可能为空
-        String filePath = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\upload.zip"; //根据id/username查出来,暂时固定测速
-
-        BLog.d("          new File(filename).exists()=  " + new File(filePath).exists());
+//      String filePath = request.getParameter("filePath");//可能为空
+        String filePath = "D:\\javaee\\daily\\DailyService\\out\\artifacts\\DailyService_war_exploded\\upload\\MyApplication.zip"; //根据id/username查出来,暂时固定测速
+        BLog.d("          is  file exists =  " + new File(filePath).exists());
 
         File file1 = new File(filePath);
         long maxLength = file1.length();
         long lastModified = file1.lastModified();
-
         BLog.d("   range=" + range + "   file.length()()=" + maxLength + "     lastModified=" + lastModified);
 
         long start = Long.parseLong(range), end = maxLength;
-
         long requestSize;
         if (end != 0 && end > start) {
             requestSize = end - start;
@@ -154,7 +160,6 @@ public class UploadController {
         response.setContentType("application/x-download");
         filePath = new String(filePath.getBytes("UTF-8"), "ISO8859-1");
         response.addHeader("Content-Disposition", "attachment;filename=" + filePath);
-
 
         RandomAccessFile raFile = new RandomAccessFile(filePath, "r");
         byte[] buffer = new byte[4096];
@@ -174,9 +179,21 @@ public class UploadController {
             }
             needSize -= buffer.length;
         }
-
         raFile.close();
         os.close();
+    }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "breakpointdownload")
+    public void upload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
 
     }
+
+
 }
