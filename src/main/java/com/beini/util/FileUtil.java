@@ -1,9 +1,7 @@
 package com.beini.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.SequenceInputStream;
+import java.io.*;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -53,6 +51,25 @@ public class FileUtil {
             e.printStackTrace();
         }
 
+    }
 
+    public static void appendFile(String str, File dest) {
+        RandomAccessFile randomAccessStr;
+        RandomAccessFile randomAccessDest;
+        try {
+            randomAccessStr = new RandomAccessFile(str, "rw");
+            randomAccessDest = new RandomAccessFile(dest, "rw");
+
+            long strLength = randomAccessStr.length();
+            long destLength = randomAccessDest.length();
+            randomAccessStr.setLength(strLength + destLength);
+            FileChannel fileChannelStr = randomAccessStr.getChannel();
+            FileChannel fileChannel1Dest = randomAccessDest.getChannel();
+            fileChannelStr.transferFrom(fileChannel1Dest, strLength, fileChannel1Dest.size());
+            randomAccessStr.close();
+            randomAccessDest.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

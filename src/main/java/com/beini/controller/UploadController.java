@@ -1,9 +1,11 @@
 package com.beini.controller;
 
+import com.beini.bean.DailyBean;
 import com.beini.bean.FileRequestBean;
 import com.beini.bean.UserBean;
 import com.beini.http.FileResponse;
 import com.beini.util.BLog;
+import com.beini.util.FileUtil;
 import com.beini.util.MD5Util;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
@@ -120,7 +122,10 @@ public class UploadController {
     /**
      *   下载：
      *    1 单线程下载
-     *    2 多线程下载  tcp的拥塞算法决定了多线程下载比较快
+     *    2 多线程下载  tcp的拥塞算法等决定了多线程下载比较快
+     *
+     *
+     *
      *    上传：
      *    1 单线程上传
      *    2 多线程上传
@@ -184,14 +189,58 @@ public class UploadController {
     }
 
     /**
-     *
      * @param request
      * @param response
      * @throws IOException
      */
-    @RequestMapping(value = "breakpointdownload")
-    public void upload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "breakpointUpload")
+    public void upload(@RequestParam(value = "file", required = false) MultipartFile file, @RequestBody FileRequestBean fileRequestBean,
+                       HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws IOException {
+        String path = request.getSession().getServletContext()
+                .getRealPath("upload");
 
+        int range = Integer.parseInt(request.getHeader("range"));
+        //根据名字进行唯一性的标签
+        String fileName = file.getOriginalFilename();
+        BLog.d(" breakpointUpload  fileName=" + fileName + " path== " + path + "   range=" + range + "   " + fileRequestBean.getFileMd5());
+        File fileService = new File(path);
+        if (fileService.exists()) { // 服务器是否有文件,用redis保存md5的值
+
+
+        } else {
+            if (range > 0) {
+
+            } else {
+
+            }
+
+        }
+
+
+
+        // 文件是否完整
+        // 拼接
+        if (range > 0) {
+//            FileUtil.appendFile(path, file.getBytes());
+        } else {
+            File targetFile = new File(path, fileName);
+            if (!targetFile.exists()) {
+                targetFile.mkdirs();
+            }
+            try {
+                file.transferTo(targetFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        FileResponse fileResponse = new FileResponse();
+        fileResponse.setReturnCode(0);
+        fileResponse.setReturnMessage("error msg");
+        fileResponse
+                .setFileId(request.getContextPath() + "/upload/" + fileName);
+        Gson gson = new Gson();
+        out.write(gson.toJson(fileResponse));
 
     }
 
