@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by beini on 2017/10/19.
  */
-public class UserBean {
+public class UserBean  {
 
     private int user_id;
     private String username;

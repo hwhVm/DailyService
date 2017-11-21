@@ -2,8 +2,9 @@ package com.beini.controller;
 
 import com.beini.bean.TokenBean;
 import com.beini.bean.UserBean;
+import com.beini.constant.NetConstants;
 import com.beini.http.BaseResponseJson;
-import com.beini.http.LoginSuccessResponse;
+import com.beini.http.LoginResponse;
 import com.beini.service.UserService;
 import com.beini.util.BLog;
 import com.beini.util.IpUtil;
@@ -17,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -57,35 +56,37 @@ public class UserController {
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public @ResponseBody
-    String login(@RequestBody UserBean userBean) {
-        BLog.d(" login " + userBean.toString());
-
+    String login(@RequestBody UserBean userBean, HttpServletRequest request) {
+        BLog.d(" login " + userBean.toString() + "     " + request.getSession().getId());
+        //
+        BLog.d("     context path       " + request.getSession().getServletContext().getContextPath());
         String email = userBean.getEmail();
-        LoginSuccessResponse baseResponseJson = new LoginSuccessResponse();
+        LoginResponse loginResponse = new LoginResponse();
         UserBean userBean1 = userService.findUserByEmail(email);
         if (userBean1 != null) {//  is register
             String passwrod = userBean.getPassword();
 
             //success return token
             List<UserBean> userBeans = userService.queryUserByUserEmailAndPasswrod(email, passwrod);
-            BLog.d("          userBeans.size()="+userBeans.size());
+            BLog.d("          userBeans.size()=" + userBeans.size());
             if (userBeans.size() > 0) {
-//                TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getId());
-                TokenBean tokenBean = new TokenBean();
-                baseResponseJson.setIp(tokenBean.getIp());
-                baseResponseJson.setToken(tokenBean.getToken());
-                baseResponseJson.setUserId(tokenBean.getUserId());
-                baseResponseJson.setReturnCode(0);
+//              TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getUser_id());
+                //session缓存
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute(NetConstants.USERID_SESSION, userBeans.get(0).getUser_id());
+
+                loginResponse.setUserBean(userBeans.get(0));
+                loginResponse.setReturnCode(NetConstants.IS_SUCCESS);
             } else {
-                baseResponseJson.setReturnCode(1);
-                baseResponseJson.setReturnMessage(" error ");
+                loginResponse.setReturnCode(NetConstants.IS_FAILED);
+                loginResponse.setReturnMessage(" error ");
             }
         } else {//faile
-            baseResponseJson.setReturnCode(1);
-            baseResponseJson.setReturnMessage("user is exist");
+            loginResponse.setReturnCode(1);
+            loginResponse.setReturnMessage("user is exist");
         }
 
-        String returnJson = new Gson().toJson(baseResponseJson);
+        String returnJson = new Gson().toJson(loginResponse);
         BLog.d("    returnJson=" + returnJson);
         return returnJson;
     }
@@ -123,7 +124,7 @@ public class UserController {
         }
 
         UserBean userBeans = userService.findUserByEmail(currentUser.getEmail());
-        BLog.d("              (userBeans==null)="+(userBeans==null));
+        BLog.d("              (userBeans==null)=" + (userBeans == null));
         if (userBeans != null) {
             baseResponseJson.setReturnCode(1);
             baseResponseJson.setReturnMessage("user is exist");

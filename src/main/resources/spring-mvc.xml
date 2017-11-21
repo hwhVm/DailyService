@@ -41,4 +41,17 @@
 
     <!-- 引入spring-data-redis.xml -->
     <import resource="spring-data-redis.xml"/>
+
+    <!--
+        在mvc:interceptors标签下声明interceptor主要有两种方式：
+   （1）直接定义一个Interceptor实现类的bean对象。使用这种方式声明的Interceptor拦截器将会对所有的请求进行拦截。
+   （2）使用mvc:interceptor标签进行声明。使用这种方式进行声明的Interceptor可以通过mvc:mapping子标签来定义需要进行拦截的请求路径。
+   -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!--匹配的是url路径， 如果不配置或/**,将拦截所有的Controller-->
+            <mvc:exclude-mapping path="/login"/><!-- 不需要拦截的地址 -->
+            <bean class="com.beini.interceptor.SessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

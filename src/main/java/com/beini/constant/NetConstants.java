@@ -5,11 +5,11 @@ package com.beini.constant;
  */
 
 public class NetConstants {
-    public final static int IS_SUCCESS = 0;
-    public final static int IS_FAILED = 1;
+    public final static int IS_SUCCESS = 1;
+    public final static int IS_FAILED = 0;
     /**
      * token过期时间
      */
     public final static int TOKEN_EXPIRES_HOUR = 2;
-
+    public final static String USERID_SESSION = "USERID_SESSION";
 }
