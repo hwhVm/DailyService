@@ -50,7 +50,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/><!--匹配的是url路径， 如果不配置或/**,将拦截所有的Controller-->
-            <mvc:exclude-mapping path="/login"/><!-- 不需要拦截的地址 -->
+            <!--<mvc:exclude-mapping path="/login"/>&lt;!&ndash; 不需要拦截的地址 &ndash;&gt;-->
             <bean class="com.beini.interceptor.SessionInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

@@ -26,7 +26,7 @@ public class DailyServiceImpl implements DailyService {
     }
 
     public DailyPageBean queryDailyByNum(DailyPageBean dailyPageBean) {
-        List<DailyBean> dailyBeans = dailyMapper.queryDailyByNum(dailyPageBean.getCurrentPage(), dailyPageBean.getPageSize(),dailyPageBean.getUser_id());
+        List<DailyBean> dailyBeans = dailyMapper.queryDailyByNum(dailyPageBean.getCurrentPage(), dailyPageBean.getPageSize(), (int) dailyPageBean.getUser_id());
         dailyPageBean.setDailyBeans(dailyBeans);
 //      dailyPageBean.setDailyCount(getDailyCount());
         return dailyPageBean;

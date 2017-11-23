@@ -13,10 +13,9 @@ public class DailyPageBean {
     private int pageCount;//共多少页
     private int dailyCount;//共多少条记录
     private List<DailyBean> dailyBeans;
-    private int user_id;
+    private long user_id;
 
-
-    public int getUser_id() {
+    public long getUser_id() {
         return user_id;
     }
 
@@ -75,5 +74,18 @@ public class DailyPageBean {
         this.pageCount = pageCount;
     }
 
+
+    @Override
+    public String toString() {
+        return "DailyPageBean{" +
+                "currentPage=" + currentPage +
+                ", pageSize=" + pageSize +
+                ", beginIndex=" + beginIndex +
+                ", pageCount=" + pageCount +
+                ", dailyCount=" + dailyCount +
+                ", dailyBeans=" + dailyBeans +
+                ", user_id=" + user_id +
+                '}';
+    }
 
 }

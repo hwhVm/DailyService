@@ -57,37 +57,34 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public @ResponseBody
     String login(@RequestBody UserBean userBean, HttpServletRequest request) {
-        BLog.d(" login " + userBean.toString() + "     " + request.getSession().getId());
-        //
-        BLog.d("     context path       " + request.getSession().getServletContext().getContextPath());
+        BLog.d(" login " + userBean.toString() + "     " + request.getSession().getId() + "   context path  =" + request.getSession().getServletContext().getContextPath());
         String email = userBean.getEmail();
         LoginResponse loginResponse = new LoginResponse();
         UserBean userBean1 = userService.findUserByEmail(email);
         if (userBean1 != null) {//  is register
             String passwrod = userBean.getPassword();
-
             //success return token
             List<UserBean> userBeans = userService.queryUserByUserEmailAndPasswrod(email, passwrod);
-            BLog.d("          userBeans.size()=" + userBeans.size());
             if (userBeans.size() > 0) {
 //              TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getUser_id());
                 //session缓存
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute(NetConstants.USERID_SESSION, userBeans.get(0).getUser_id());
-
                 loginResponse.setUserBean(userBeans.get(0));
                 loginResponse.setReturnCode(NetConstants.IS_SUCCESS);
+                loginResponse.setReturnMessage("success");
             } else {
                 loginResponse.setReturnCode(NetConstants.IS_FAILED);
                 loginResponse.setReturnMessage(" error ");
             }
         } else {//faile
-            loginResponse.setReturnCode(1);
+            loginResponse.setReturnCode(NetConstants.IS_FAILED);
             loginResponse.setReturnMessage("user is exist");
         }
 
         String returnJson = new Gson().toJson(loginResponse);
         BLog.d("    returnJson=" + returnJson);
+
         return returnJson;
     }
 
@@ -115,23 +112,23 @@ public class UserController {
     String register(@RequestBody UserBean currentUser) {
         BLog.d(" register " + currentUser.toString());
         BaseResponseJson baseResponseJson = new BaseResponseJson();
-        baseResponseJson.setReturnCode(1);
-        baseResponseJson.setReturnMessage("email no for null");
 
         String email = currentUser.getEmail();
         if (StringUtils.isEmpty(email)) {
+            baseResponseJson.setReturnCode(NetConstants.IS_FAILED);
+            baseResponseJson.setReturnMessage("email no for null");
             return new Gson().toJson(baseResponseJson);
         }
 
         UserBean userBeans = userService.findUserByEmail(currentUser.getEmail());
         BLog.d("              (userBeans==null)=" + (userBeans == null));
         if (userBeans != null) {
-            baseResponseJson.setReturnCode(1);
+            baseResponseJson.setReturnCode(NetConstants.IS_FAILED);
             baseResponseJson.setReturnMessage("user is exist");
         } else {
             int returnSuccess = userService.registerUser(currentUser);
             BLog.d("       returnSuccess=" + returnSuccess);
-            baseResponseJson.setReturnCode(0);
+            baseResponseJson.setReturnCode(NetConstants.IS_SUCCESS);
             baseResponseJson.setReturnMessage("register is successed");
         }
         return new Gson().toJson(baseResponseJson);

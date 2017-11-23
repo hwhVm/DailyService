@@ -4,7 +4,14 @@ package com.beini.bean;
  * Created by beini on 2017/10/23.
  */
 public class TokenBean {
+
     private String token;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    private int userId;
     private String ip;
 
     public String getIp() {
@@ -19,6 +26,11 @@ public class TokenBean {
 
     }
 
+    public TokenBean(int userId, String token) {
+        this.userId = userId;
+        this.token = token;
+    }
+
     public String getToken() {
         return token;
     }
@@ -27,5 +39,8 @@ public class TokenBean {
         this.token = token;
     }
 
+    public long getUserId() {
+        return userId;
+    }
 
 }

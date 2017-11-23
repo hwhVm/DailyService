@@ -8,12 +8,14 @@ import com.beini.service.DailyService;
 import com.beini.util.BLog;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -49,18 +51,18 @@ public class DailyController {
     @RequestMapping(value = "addDaily", method = RequestMethod.POST)
     public @ResponseBody
     String addDaily(@RequestBody DailyBean dailyBean) {
-        BLog.d("    addDaily   "+dailyBean.toString());
+        BLog.d("    addDaily   " + dailyBean.toString());
         BaseResponseJson responseJson = new BaseResponseJson();
         try {
             int isSuccess = dailyService.insertDaily(dailyBean);
-            BLog.d(" isSuccess="+isSuccess);
+            BLog.d(" isSuccess=" + isSuccess);
             if (isSuccess == 1) {
                 responseJson.setReturnCode(NetConstants.IS_SUCCESS);
             } else {
                 responseJson.setReturnCode(NetConstants.IS_FAILED);
             }
         } catch (Exception e) {
-            BLog.d(" e="+e);
+            BLog.d(" e=" + e);
             responseJson.setReturnCode(NetConstants.IS_FAILED);
         }
 
@@ -88,10 +90,11 @@ public class DailyController {
 
     @RequestMapping(value = "queryDailyByNum", method = RequestMethod.POST)
     public @ResponseBody
-    String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean) {
-        BLog.d("    queryDailyByNum   ");
-
+    String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean,  HttpServletRequest httpRequest) {
+        BLog.d("    queryDailyByNum   "+dailyPageRequestBean.toString());
+        BLog.d(" --------------1111111-------  " + httpRequest.getSession().getAttribute(NetConstants.USERID_SESSION));
         DailyPageBean dailyPageBean = dailyService.queryDailyByNum(dailyPageRequestBean);
+        BLog.d("       return  DailyPageBean  ="+dailyPageBean.toString());
         return new Gson().toJson(dailyPageBean);
     }
 
