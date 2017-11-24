@@ -13,12 +13,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -47,6 +42,22 @@ public class UserController {
     @Autowired
     IpUtil ipUtil;
 
+
+
+
+    /**
+     * logout
+     *
+     * @param currentUser
+     * @return
+     */
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public @ResponseBody
+    String logout(@RequestBody UserBean currentUser) {
+        redisCacheUtil.deleteToken(currentUser.getUser_id());
+        return new Gson().toJson(new BaseResponseJson().setReturnCode(0));
+    }
+
     /**
      * login
      * username  or email  login
@@ -54,10 +65,11 @@ public class UserController {
      * @param userBean
      * @return
      */
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public @ResponseBody
-    String login(@RequestBody UserBean userBean, HttpServletRequest request) {
-        BLog.d(" login " + userBean.toString() + "     " + request.getSession().getId() + "   context path  =" + request.getSession().getServletContext().getContextPath());
+    String login(@RequestBody UserBean userBean, HttpSession httpSession) {
+        BLog.d(" login " + userBean.toString() + "     " + httpSession.getId() + "   context path  =" + httpSession.getServletContext().getContextPath());
         String email = userBean.getEmail();
         LoginResponse loginResponse = new LoginResponse();
         UserBean userBean1 = userService.findUserByEmail(email);
@@ -68,7 +80,6 @@ public class UserController {
             if (userBeans.size() > 0) {
 //              TokenBean tokenBean = redisCacheUtil.createToken(userBeans.get(0).getUser_id());
                 //session缓存
-                HttpSession httpSession = request.getSession();
                 httpSession.setAttribute(NetConstants.USERID_SESSION, userBeans.get(0).getUser_id());
                 loginResponse.setUserBean(userBeans.get(0));
                 loginResponse.setReturnCode(NetConstants.IS_SUCCESS);
@@ -86,19 +97,6 @@ public class UserController {
         BLog.d("    returnJson=" + returnJson);
 
         return returnJson;
-    }
-
-    /**
-     * logout
-     *
-     * @param currentUser
-     * @return
-     */
-    @RequestMapping(value = "logout", method = RequestMethod.POST)
-    public @ResponseBody
-    String logout(@RequestBody UserBean currentUser) {
-        redisCacheUtil.deleteToken(currentUser.getUser_id());
-        return new Gson().toJson(new BaseResponseJson().setReturnCode(0));
     }
 
     /**

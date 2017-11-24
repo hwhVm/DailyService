@@ -2,6 +2,7 @@ package com.beini.interceptor;
 
 import com.beini.constant.NetConstants;
 import com.beini.util.BLog;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,11 +28,12 @@ public class SessionInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        BLog.d(" ---------------------  " + httpServletRequest.getSession().getAttribute(NetConstants.USERID_SESSION));
-//        if (o == null || "".equals(o.toString())) {
-//            httpServletResponse.sendRedirect(httpServletRequest.getSession().getServletContext().getContextPath() + "/login");
-//            return false;
-//        }
+//        BLog.d("   this.hashCode()=" + this.hashCode());
+//        BLog.d(" ---------------------  " + httpServletRequest.getSession().getId() + "              " + httpServletRequest.getSession().getAttribute(NetConstants.USERID_SESSION));
+        //进行处理:例如判定是否登陆
+        if (StringUtils.isEmpty(httpServletRequest.getSession().getId()) || StringUtils.isEmpty(httpServletRequest.getSession().getAttribute(NetConstants.USERID_SESSION))) {
+
+        }
         return true;
     }
 
@@ -47,7 +49,6 @@ public class SessionInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-
     }
 
     /**
@@ -61,6 +62,5 @@ public class SessionInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-
     }
 }

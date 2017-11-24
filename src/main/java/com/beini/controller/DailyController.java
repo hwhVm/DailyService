@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -27,7 +29,7 @@ public class DailyController {
     @Autowired
     DailyService dailyService;
 
-//    @RequestMapping(value = "addDaily", method = RequestMethod.POST)
+    //    @RequestMapping(value = "addDaily", method = RequestMethod.POST)
 //    public void addDaily(@RequestBody DailyBean dailyBean, HttpServletResponse response, PrintWriter out) {
 //        BLog.d("              addDaily     " + dailyBean.toString());
 //        BaseResponseJson responseJson = new BaseResponseJson();
@@ -72,7 +74,6 @@ public class DailyController {
     @RequestMapping(value = "updataDaily", method = RequestMethod.POST)
     public @ResponseBody
     String updataDaily(DailyBean dailyBean) {
-
         dailyService.updataDaily(dailyBean);
         BaseResponseJson baseResponseJson = new BaseResponseJson();
         baseResponseJson.setReturnCode(0);
@@ -90,11 +91,9 @@ public class DailyController {
 
     @RequestMapping(value = "queryDailyByNum", method = RequestMethod.POST)
     public @ResponseBody
-    String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean,  HttpServletRequest httpRequest) {
-        BLog.d("    queryDailyByNum   "+dailyPageRequestBean.toString());
-        BLog.d(" --------------1111111-------  " + httpRequest.getSession().getAttribute(NetConstants.USERID_SESSION));
+    String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean, HttpServletRequest httpServletRequest) {
+        BLog.d("    queryDailyByNum   " + dailyPageRequestBean.toString()+"   "+httpServletRequest.getHeader("Cache-Control"));
         DailyPageBean dailyPageBean = dailyService.queryDailyByNum(dailyPageRequestBean);
-        BLog.d("       return  DailyPageBean  ="+dailyPageBean.toString());
         return new Gson().toJson(dailyPageBean);
     }
 
