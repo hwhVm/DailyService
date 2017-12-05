@@ -3,7 +3,6 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:/spring-*.xml</param-value>
@@ -14,6 +13,11 @@
         <param-value>classpath:log4j.properties</param-value>
     </context-param>
 
+    <!--session start-->
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
+    <!--session end-->
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

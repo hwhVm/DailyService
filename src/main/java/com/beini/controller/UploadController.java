@@ -7,6 +7,7 @@ import com.beini.http.FileResponse;
 import com.beini.util.BLog;
 import com.beini.util.FileUtil;
 import com.beini.util.MD5Util;
+import com.beini.util.StringUtil;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.UUID;
 
 /**
  * Created by beini on 2017/10/26.
@@ -74,32 +76,38 @@ public class UploadController {
      * @param out
      */
     @RequestMapping(value = "multipart_upload")
-    public void uploadMultipartFile(
-            @RequestParam(value = "file", required = false) MultipartFile[] files,
-            HttpServletRequest request, ModelMap model, PrintWriter out) {
+    public void uploadMultipartFile( //文件重复问题
+                                     @RequestParam(value = "file", required = false) MultipartFile[] files,
+                                     HttpServletRequest request, ModelMap model, PrintWriter out) {
 
         String path = request.getSession().getServletContext()
                 .getRealPath("upload");
-        BLog.d("    files.length=" + files.length + "    path=" + path);
 
+        BLog.d("    files.length=" + files.length + "    path=" + path);
+        StringBuilder sb = new StringBuilder();
         for (MultipartFile fileSingle : files) {
             String fileName = fileSingle.getOriginalFilename();
+            BLog.d("         fileName= " + fileName);
             File targetFile = new File(path, fileName);
-            if (!targetFile.exists()) {
-                targetFile.mkdirs();
-            }
-            try {
-                fileSingle.transferTo(targetFile);
-            } catch (Exception e) {
-                e.printStackTrace();
+            String strTemp = path + "\n" + fileName;
+            sb.append(strTemp).append(",");
+            if (targetFile.exists()) {
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                try {
+                    fileSingle.transferTo(targetFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
+        
         FileResponse fileResponse = new FileResponse();
         fileResponse.setReturnCode(0);
         fileResponse.setReturnMessage("error msg");
         fileResponse
-                .setFileId(request.getContextPath() + "/upload/");
+                .setFileId(sb.toString());
         Gson gson = new Gson();
         out.write(gson.toJson(fileResponse));
     }
@@ -215,7 +223,6 @@ public class UploadController {
             }
 
         }
-
 
 
         // 文件是否完整
