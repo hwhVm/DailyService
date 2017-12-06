@@ -85,6 +85,7 @@ public class UploadController {
 
         BLog.d("    files.length=" + files.length + "    path=" + path);
         StringBuilder sb = new StringBuilder();
+
         for (MultipartFile fileSingle : files) {
             String fileName = fileSingle.getOriginalFilename();
             BLog.d("         fileName= " + fileName);

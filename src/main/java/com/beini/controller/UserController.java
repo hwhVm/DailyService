@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by beini on 2017/10/20.
@@ -73,7 +74,7 @@ public class UserController {
         String email = userBean.getEmail();
         LoginResponse loginResponse = new LoginResponse();
         UserBean userBean1 = userService.findUserByEmail(email);
-        if (userBean1 != null) {//  is register
+        if (userBean1 != null) {//  is register   Optional.of(userBean).isPresent();
             String passwrod = userBean.getPassword();
             //success return token
             List<UserBean> userBeans = userService.queryUserByUserEmailAndPasswrod(email, passwrod);

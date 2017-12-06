@@ -22,7 +22,7 @@ public class ChooseDataSource extends AbstractRoutingDataSource {
     // 设置方法名前缀对应的数据源
     public void setMethodType(Map<String, String> map) {
         for (String key : map.keySet()) {
-            List<String> v = new ArrayList<String>();
+            List<String> v = new ArrayList<>();
             String[] types = map.get(key).split(",");
             for (String type : types) {
                 if (!StringUtils.isEmpty(type)) {

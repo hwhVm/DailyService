@@ -6,10 +6,12 @@ import com.beini.constant.NetConstants;
 import com.beini.http.BaseResponseJson;
 import com.beini.service.DailyService;
 import com.beini.util.BLog;
+import com.beini.util.Base64Util;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by beini on 2017/7/8.
@@ -94,7 +97,7 @@ public class DailyController {
     String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean, HttpServletRequest httpServletRequest) {
         BLog.d("    queryDailyByNum   " + dailyPageRequestBean.toString()+"   "+httpServletRequest.getHeader("Cache-Control"));
         DailyPageBean dailyPageBean = dailyService.queryDailyByNum(dailyPageRequestBean);
-        return new Gson().toJson(dailyPageBean);
+        return Base64Util.encode(new Gson().toJson(dailyPageBean));
     }
 
     @RequestMapping(value = "queryDailyCount", method = RequestMethod.POST)

@@ -21,11 +21,14 @@ public class FileUtil {
     public static void merge(List<String> cellsPath, String newFilePath) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(newFilePath);
-            ArrayList<FileInputStream> cellsInputString = new ArrayList<FileInputStream>();
-
-            for (int i = 0; i < cellsPath.size(); i++) {
-                cellsInputString.add(new FileInputStream(cellsPath.get(i)));
-            }
+            ArrayList<FileInputStream> cellsInputString = new ArrayList<>();
+            cellsPath.forEach(cellsPathSingle -> {
+                try {
+                    cellsInputString.add(new FileInputStream(cellsPathSingle));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            });
             final Iterator<FileInputStream> iterator = cellsInputString.iterator();
             Enumeration<FileInputStream> enumeration = new Enumeration<FileInputStream>() {
                 public boolean hasMoreElements() {
