@@ -135,7 +135,7 @@ public class UserController {
 
     /**
      * getBackPasswrod
-     *
+     *  internal
      * @param currentUser
      * @return
      */

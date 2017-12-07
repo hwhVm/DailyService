@@ -3,6 +3,7 @@ package com.beini.controller;
 import com.beini.bean.DailyBean;
 import com.beini.bean.FileRequestBean;
 import com.beini.bean.UserBean;
+import com.beini.constant.NetConstants;
 import com.beini.http.FileResponse;
 import com.beini.util.BLog;
 import com.beini.util.FileUtil;
@@ -59,7 +60,7 @@ public class UploadController {
         }
 
         FileResponse fileResponse = new FileResponse();
-        fileResponse.setReturnCode(0);
+        fileResponse.setReturnCode(NetConstants.IS_SUCCESS);
         fileResponse.setReturnMessage("error msg");
         fileResponse
                 .setFileId(request.getContextPath() + "/upload/" + fileName);
@@ -105,7 +106,7 @@ public class UploadController {
         }
         
         FileResponse fileResponse = new FileResponse();
-        fileResponse.setReturnCode(0);
+        fileResponse.setReturnCode(NetConstants.IS_SUCCESS);
         fileResponse.setReturnMessage("error msg");
         fileResponse
                 .setFileId(sb.toString());
@@ -243,7 +244,7 @@ public class UploadController {
         }
 
         FileResponse fileResponse = new FileResponse();
-        fileResponse.setReturnCode(0);
+        fileResponse.setReturnCode(NetConstants.IS_SUCCESS);
         fileResponse.setReturnMessage("error msg");
         fileResponse
                 .setFileId(request.getContextPath() + "/upload/" + fileName);

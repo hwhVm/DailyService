@@ -60,14 +60,12 @@ public class DailyController {
         BaseResponseJson responseJson = new BaseResponseJson();
         try {
             int isSuccess = dailyService.insertDaily(dailyBean);
-            BLog.d(" isSuccess=" + isSuccess);
-            if (isSuccess == 1) {
+            if (isSuccess == NetConstants.IS_SUCCESS) {
                 responseJson.setReturnCode(NetConstants.IS_SUCCESS);
             } else {
                 responseJson.setReturnCode(NetConstants.IS_FAILED);
             }
         } catch (Exception e) {
-            BLog.d(" e=" + e);
             responseJson.setReturnCode(NetConstants.IS_FAILED);
         }
 
@@ -79,7 +77,7 @@ public class DailyController {
     String updataDaily(DailyBean dailyBean) {
         dailyService.updataDaily(dailyBean);
         BaseResponseJson baseResponseJson = new BaseResponseJson();
-        baseResponseJson.setReturnCode(0);
+        baseResponseJson.setReturnCode(NetConstants.IS_SUCCESS);
         return new Gson().toJson(baseResponseJson);
     }
 
@@ -88,7 +86,7 @@ public class DailyController {
     String deteleDailyById(DailyBean dailyBean) {
         dailyService.deteleDaily(dailyBean.getDaily_id());
         BaseResponseJson baseResponseJson = new BaseResponseJson();
-        baseResponseJson.setReturnCode(0);
+        baseResponseJson.setReturnCode(NetConstants.IS_SUCCESS);
         return new Gson().toJson(baseResponseJson);
     }
 
