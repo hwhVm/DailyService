@@ -6,12 +6,9 @@ import com.beini.constant.NetConstants;
 import com.beini.http.BaseResponseJson;
 import com.beini.service.DailyService;
 import com.beini.util.BLog;
-import com.beini.util.Base64Util;
-import com.google.gson.Gson;
+import com.beini.util.GsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,7 +66,7 @@ public class DailyController {
             responseJson.setReturnCode(NetConstants.IS_FAILED);
         }
 
-        return new Gson().toJson(responseJson);
+        return GsonUtil.getGsonUtil().toJson(responseJson);
     }
 
     @RequestMapping(value = "updataDaily", method = RequestMethod.POST)
@@ -78,7 +75,7 @@ public class DailyController {
         dailyService.updataDaily(dailyBean);
         BaseResponseJson baseResponseJson = new BaseResponseJson();
         baseResponseJson.setReturnCode(NetConstants.IS_SUCCESS);
-        return new Gson().toJson(baseResponseJson);
+        return GsonUtil.getGsonUtil().toJson(baseResponseJson);
     }
 
     @RequestMapping(value = "deteleDaily", method = RequestMethod.POST)
@@ -87,15 +84,15 @@ public class DailyController {
         dailyService.deteleDaily(dailyBean.getDaily_id());
         BaseResponseJson baseResponseJson = new BaseResponseJson();
         baseResponseJson.setReturnCode(NetConstants.IS_SUCCESS);
-        return new Gson().toJson(baseResponseJson);
+        return GsonUtil.getGsonUtil().toJson(baseResponseJson);
     }
 
     @RequestMapping(value = "queryDailyByNum", method = RequestMethod.POST)
     public @ResponseBody
     String queryDailyByNum(@RequestBody DailyPageBean dailyPageRequestBean, HttpServletRequest httpServletRequest) {
-        BLog.d("    queryDailyByNum   " + dailyPageRequestBean.toString()+"   "+httpServletRequest.getHeader("Cache-Control"));
+        BLog.d("    queryDailyByNum   " + dailyPageRequestBean.toString() + "   " + httpServletRequest.getHeader("Cache-Control"));
         DailyPageBean dailyPageBean = dailyService.queryDailyByNum(dailyPageRequestBean);
-        return Base64Util.encode(new Gson().toJson(dailyPageBean));
+        return GsonUtil.getGsonUtil().toJson(dailyPageBean);
     }
 
     @RequestMapping(value = "queryDailyCount", method = RequestMethod.POST)
@@ -103,7 +100,7 @@ public class DailyController {
     String queryDailyCount() {
         BLog.d("    queryDailyCount   ");
         int dailyCount = dailyService.queryDailyCount();
-        return new Gson().toJson(dailyCount);
+        return GsonUtil.getGsonUtil().toJson(dailyCount);
     }
 
 

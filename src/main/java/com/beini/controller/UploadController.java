@@ -2,26 +2,17 @@ package com.beini.controller;
 
 import com.beini.bean.DailyBean;
 import com.beini.bean.FileRequestBean;
-import com.beini.bean.UserBean;
 import com.beini.constant.NetConstants;
 import com.beini.http.FileResponse;
-import com.beini.util.BLog;
-import com.beini.util.FileUtil;
-import com.beini.util.MD5Util;
-import com.beini.util.StringUtil;
-import com.google.gson.Gson;
-import org.springframework.stereotype.Component;
+import com.beini.util.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.rmi.runtime.Log;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.UUID;
 
 /**
  * Created by beini on 2017/10/26.
@@ -64,8 +55,7 @@ public class UploadController {
         fileResponse.setReturnMessage("error msg");
         fileResponse
                 .setFileId(request.getContextPath() + "/upload/" + fileName);
-        Gson gson = new Gson();
-        out.write(gson.toJson(fileResponse));
+        out.write(GsonUtil.getGsonUtil().toJson(fileResponse));
     }
 
     /**
@@ -104,14 +94,14 @@ public class UploadController {
                 }
             }
         }
-        
+
         FileResponse fileResponse = new FileResponse();
         fileResponse.setReturnCode(NetConstants.IS_SUCCESS);
         fileResponse.setReturnMessage("error msg");
         fileResponse
                 .setFileId(sb.toString());
-        Gson gson = new Gson();
-        out.write(gson.toJson(fileResponse));
+
+        out.write(GsonUtil.getGsonUtil().toJson(fileResponse));
     }
 
     @RequestMapping(value = "returnFileInfo", method = RequestMethod.POST)
@@ -127,7 +117,7 @@ public class UploadController {
         newFileRequestBean.setId(1);
         newFileRequestBean.setRange("3");
         newFileRequestBean.setFileMd5(MD5Util.file2Md5(file));
-        return new Gson().toJson(newFileRequestBean);
+        return GsonUtil.getGsonUtil().toJson(newFileRequestBean);
     }
     /**
      *   下载：
@@ -248,8 +238,7 @@ public class UploadController {
         fileResponse.setReturnMessage("error msg");
         fileResponse
                 .setFileId(request.getContextPath() + "/upload/" + fileName);
-        Gson gson = new Gson();
-        out.write(gson.toJson(fileResponse));
+        out.write(GsonUtil.getGsonUtil().toJson(fileResponse));
 
     }
 

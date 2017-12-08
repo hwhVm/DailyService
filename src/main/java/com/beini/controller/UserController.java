@@ -7,13 +7,14 @@ import com.beini.http.BaseResponseJson;
 import com.beini.http.LoginResponse;
 import com.beini.service.UserService;
 import com.beini.util.BLog;
+import com.beini.util.GsonUtil;
 import com.beini.util.IpUtil;
 import com.beini.util.RedisCacheUtil;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -44,8 +45,6 @@ public class UserController {
     IpUtil ipUtil;
 
 
-
-
     /**
      * logout
      *
@@ -56,7 +55,8 @@ public class UserController {
     public @ResponseBody
     String logout(@RequestBody UserBean currentUser) {
         redisCacheUtil.deleteToken(currentUser.getUser_id());
-        return new Gson().toJson(new BaseResponseJson().setReturnCode(0));
+
+        return  GsonUtil.getGsonUtil().toJson(new BaseResponseJson().setReturnCode(0));
     }
 
     /**
@@ -94,10 +94,20 @@ public class UserController {
             loginResponse.setReturnMessage("user is exist");
         }
 
-        String returnJson = new Gson().toJson(loginResponse);
-        BLog.d("    returnJson=" + returnJson);
+        return GsonUtil.getGsonUtil().toJson(loginResponse);
+    }
 
-        return returnJson;
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public @ResponseBody
+    String update(@RequestBody UserBean currentUser) {
+
+
+        String email = currentUser.getEmail();
+        if (StringUtils.isEmpty(email)) {
+
+        }
+
+        return null;
     }
 
     /**
@@ -116,7 +126,8 @@ public class UserController {
         if (StringUtils.isEmpty(email)) {
             baseResponseJson.setReturnCode(NetConstants.IS_FAILED);
             baseResponseJson.setReturnMessage("email no for null");
-            return new Gson().toJson(baseResponseJson);
+
+            return GsonUtil.getGsonUtil().toJson(baseResponseJson);
         }
 
         UserBean userBeans = userService.findUserByEmail(currentUser.getEmail());
@@ -130,12 +141,13 @@ public class UserController {
             baseResponseJson.setReturnCode(NetConstants.IS_SUCCESS);
             baseResponseJson.setReturnMessage("register is successed");
         }
-        return new Gson().toJson(baseResponseJson);
+        return GsonUtil.getGsonUtil().toJson(baseResponseJson);
     }
 
     /**
      * getBackPasswrod
-     *  internal
+     * internal
+     *
      * @param currentUser
      * @return
      */
